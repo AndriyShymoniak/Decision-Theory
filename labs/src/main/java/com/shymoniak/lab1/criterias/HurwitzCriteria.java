@@ -11,9 +11,9 @@ public class HurwitzCriteria extends MatrixSolver {
 
     private double coefficient;
 
-    public HurwitzCriteria(int[][] matrix) {
+    public HurwitzCriteria(int[][] matrix, double coefficient) {
         this.matrix = matrix;
-        this.coefficient = 0.7;
+        this.coefficient = coefficient;
     }
 
     public int[] bestSolution() {
@@ -24,20 +24,25 @@ public class HurwitzCriteria extends MatrixSolver {
         for (int i = 0; i < getRows(); i++) {
             minOfRows[i] = matrixActions.findLowestIn1D(matrix[i]);
         }
+        System.out.print("The lowest values of each row: ");
+        matrixActions.print(minOfRows);
 
         // Find higher values in each row of matrix
         int[] maxOfRows = new int[getRows()];
         for (int i = 0; i < getRows(); i++) {
             maxOfRows[i] = matrixActions.findHighestIn1D(matrix[i]);
         }
+        System.out.print("The highest values of each row: ");
+        matrixActions.print(maxOfRows);
 
         // Calculate special value
         double[] specialValues = new double[getRows()];
         for (int i = 0; i < specialValues.length; i++) {
             specialValues[i] = coefficient * minOfRows[i] + (1 - coefficient) * maxOfRows[i];
         }
+        System.out.println("Formula: [k*min + (1-k)*max]");
 
-        System.out.print("Special values for each row: ");
+        System.out.print("The values calculated with formula for each row: ");
         matrixActions.print(specialValues);
 
         // Get the highest number in special values

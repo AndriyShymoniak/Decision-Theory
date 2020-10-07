@@ -24,9 +24,12 @@ public class LaplaceCriterion extends MatrixSolver {
                 sumOfRows[i] = Arrays.stream(matrix[i]).sum();
             }
         }
+        System.out.print("Summing values for each row: ");
+        matrixActions.print(sumOfRows);
 
         // Get the highest value of row sums
         int highest = matrixActions.findHighestIn1D(sumOfRows);
+        System.out.println("The highest value of them is: " + highest);
 
         // Return the row which has the highest sum value
         return matrix[matrixActions.getIndex1D(highest,sumOfRows)];

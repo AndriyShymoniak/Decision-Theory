@@ -20,9 +20,12 @@ public class WaldCriteria extends MatrixSolver{
         for (int i = 0; i < getRows(); i++) {
             minOfRows[i] = matrixActions.findLowestIn1D(matrix[i]);
         }
+        System.out.print("Each row minimum values: ");
+        matrixActions.print(minOfRows);
 
         // Get the highest of all lower values
         int highest = matrixActions.findHighestIn1D(minOfRows);
+        System.out.println("So the highest lower value is: " + highest);
 
         // Return the row which has the highest lower value
         return matrix[matrixActions.getIndexOfRow2D(highest, matrix)];

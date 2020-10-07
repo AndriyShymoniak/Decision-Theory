@@ -2,13 +2,11 @@ package com.shymoniak.lab2;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class DecisionTreeEntity {
@@ -24,5 +22,13 @@ public class DecisionTreeEntity {
 
     public double findDecisionValue() {
         return (income * incomeProbability + loss * lossProbability) * years / factoryWorth;
+    }
+
+    public String toString() {
+        return "Option - " + variant +
+                "\nWorth: " + factoryWorth +
+                "\nIncome: " + income + ", probability: " + incomeProbability +
+                "\nLoss: " + loss + ", probability: " + lossProbability +
+                "\nYears: " + years;
     }
 }

@@ -34,9 +34,9 @@ public class TaskBL1 {
         System.out.println();
 
         BayesLaplaceCriterion bayesLaplaceCriterion = new BayesLaplaceCriterion(matrix, Constants.LAB1B_COEFFICIENTS);
-        System.out.println("The best solution by Bayes-Laplace criteria:");
+        System.out.println("Bayes-Laplace criteria:");
         int[] bayesLaplaceSolution = bayesLaplaceCriterion.bestSolution();
-        System.out.println("Answer:");
+        System.out.print("The best solution is: ");
         matrixActions.print(bayesLaplaceSolution);
 
     }

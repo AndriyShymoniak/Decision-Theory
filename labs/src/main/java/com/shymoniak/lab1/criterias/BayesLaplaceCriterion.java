@@ -25,8 +25,9 @@ public class BayesLaplaceCriterion extends MatrixSolver {
                 specialValues[i] += coefficients[j]*matrix[i][j];
             }
         }
+        System.out.println("Formula: [A11*k1 + A12*k2 + A13*k3]");
 
-        System.out.print("Special values for each row: ");
+        System.out.print("The values calculated with formula for each row: ");
         matrixActions.print(specialValues);
 
         // Get the highest number in special values

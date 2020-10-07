@@ -2,8 +2,10 @@ package com.shymoniak.lab2;
 
 import com.shymoniak.tools.Constants;
 import com.shymoniak.tools.GSON;
+import com.shymoniak.tools.MatrixActions;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,10 +42,27 @@ public class TaskL2 {
 
     public void run() {
         GSON gson = new GSON();
+        MatrixActions matrixActions = new MatrixActions();
         List<DecisionTreeEntity> decisionsList = gson.readFromFile(new File(Constants.LAB2_FILE_DIRECTORY));
-        for (DecisionTreeEntity decision: decisionsList) {
+        ArrayList<Double> resultValues = new ArrayList<>();
+        System.out.println("Decision Tree\n");
+
+        System.out.println("Formula: [(income * incomeProbability + loss * lossProbability) * years / factoryWorth]\n");
+        for (DecisionTreeEntity decision : decisionsList) {
             System.out.println(decision.toString());
-            System.out.println(decision.findDecisionValue());
+            System.out.print("Value calculated with formula: ");
+            resultValues.add(decision.findDecisionValue());
+            System.out.println(decision.findDecisionValue() + "\n");
         }
+
+        int indexOfTheBest = resultValues.indexOf(getBiggestInArraylist(resultValues));
+        System.out.println("__________________________________");
+        System.out.print("The best solution is: ");
+        System.out.println(decisionsList.get(indexOfTheBest));
+        System.out.println(resultValues.get(indexOfTheBest));
+    }
+
+    private Double getBiggestInArraylist(ArrayList<Double> doubleArrayList){
+        return doubleArrayList.stream().max(Double::compareTo).get();
     }
 }
