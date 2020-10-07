@@ -1,0 +1,46 @@
+[
+  {
+    "variant": "A",
+    "factoryWorth": 700,
+    "income": 280,
+    "loss": -80,
+    "incomeProbability":0.8,
+    "lossProbability": 0.2,
+    "buildingProbability": null,
+    "notBuildingProbability": null,
+    "years": 5
+  },
+  {
+    "variant": "B",
+    "factoryWorth": 300,
+    "income": 180,
+    "loss": -55,
+    "incomeProbability":0.8,
+    "lossProbability": 0.2,
+    "buildingProbability": null,
+    "notBuildingProbability": null,
+    "years": 5
+  },
+  {
+    "variant": "CA",
+    "factoryWorth": 700,
+    "income": 280,
+    "loss": -80,
+    "incomeProbability":0.9,
+    "lossProbability": 0.1,
+    "buildingProbability": 0.7,
+    "notBuildingProbability": 0.3,
+    "years": 4
+  },
+  {
+    "variant": "CB",
+    "factoryWorth": 300,
+    "income": 180,
+    "loss": -55,
+    "incomeProbability":0.9,
+    "lossProbability": 0.1,
+    "buildingProbability": 0.7,
+    "notBuildingProbability": 0.3,
+    "years": 4
+  }
+]
