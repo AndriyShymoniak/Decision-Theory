@@ -56,10 +56,11 @@ public class TaskL2 {
         }
 
         int indexOfTheBest = resultValues.indexOf(getBiggestInArraylist(resultValues));
-        System.out.println("__________________________________");
+        System.out.println("==================================");
         System.out.print("The best solution is: ");
         System.out.println(decisionsList.get(indexOfTheBest));
         System.out.println(resultValues.get(indexOfTheBest));
+        System.out.println("__________________________________\n");
     }
 
     private Double getBiggestInArraylist(ArrayList<Double> doubleArrayList){

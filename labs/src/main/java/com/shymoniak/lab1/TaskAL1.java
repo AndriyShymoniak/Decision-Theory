@@ -59,6 +59,6 @@ public class TaskAL1 {
         int[] hurwitzSolution2 = hurwitzCriteria.bestSolution();
         System.out.print("The best solution is: ");
         matrixActions.print(hurwitzSolution2);
-        System.out.println("____________________________\n");
+        System.out.println("__________________________________\n");
     }
 }

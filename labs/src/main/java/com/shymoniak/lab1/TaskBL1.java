@@ -38,6 +38,7 @@ public class TaskBL1 {
         int[] bayesLaplaceSolution = bayesLaplaceCriterion.bestSolution();
         System.out.print("The best solution is: ");
         matrixActions.print(bayesLaplaceSolution);
+        System.out.println("__________________________________\n");
 
     }
 }
