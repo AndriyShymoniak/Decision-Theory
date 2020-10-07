@@ -21,21 +21,19 @@ import java.io.File;
  * 90 90 70
  * 60 70 80
  */
-public class TaskB {
-    public static final String FILE_DIRECTORY = "D:\\Навчання\\4 курс І семестр\\Теорія прийняття рішень\\Програма\\Decision-Theory\\varaint_lab1.txt";
-    public static final double[] COEFFICIENTS = {0.5, 0.35, .015};
+public class TaskBL1 {
 
     public void run() {
         FileWorker fileWorker = new FileWorker();
         MatrixActions matrixActions = new MatrixActions();
-        int[][] matrix = fileWorker.readTwoDimensionalArray(new File(FILE_DIRECTORY), 3, 3);
+        int[][] matrix = fileWorker.readTwoDimensionalArray(new File(Constants.LAB1_FILE_DIRECTORY), 3, 3);
         System.out.println("    Task B\n");
         matrixActions.print(matrix);
         System.out.print("Coefficients: ");
-        matrixActions.print(COEFFICIENTS);
+        matrixActions.print(Constants.LAB1B_COEFFICIENTS);
         System.out.println();
 
-        BayesLaplaceCriterion bayesLaplaceCriterion = new BayesLaplaceCriterion(matrix, COEFFICIENTS);
+        BayesLaplaceCriterion bayesLaplaceCriterion = new BayesLaplaceCriterion(matrix, Constants.LAB1B_COEFFICIENTS);
         System.out.println("The best solution by Bayes-Laplace criteria:");
         int[] bayesLaplaceSolution = bayesLaplaceCriterion.bestSolution();
         System.out.println("Answer:");

@@ -23,13 +23,12 @@ import java.io.File;
  * 90 90 70
  * 60 70 80
  */
-public class TaskA {
-    public static final String FILE_DIRECTORY = "D:\\Навчання\\4 курс І семестр\\Теорія прийняття рішень\\Програма\\Decision-Theory\\varaint_lab1.txt";
+public class TaskAL1 {
 
     public void run(){
         FileWorker fileWorker = new FileWorker();
         MatrixActions matrixActions = new MatrixActions();
-        int[][] matrix = fileWorker.readTwoDimensionalArray(new File(FILE_DIRECTORY), 3, 3);
+        int[][] matrix = fileWorker.readTwoDimensionalArray(new File(Constants.LAB1_FILE_DIRECTORY), 3, 3);
         System.out.println("    Task A\n");
         matrixActions.print(matrix);
 
