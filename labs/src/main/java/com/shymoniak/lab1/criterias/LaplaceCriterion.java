@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 /**
  * Sums all values in each row of 2d matrix
+ * Divides them by the amount of elements in the row
  * The row which the highest sum value is the best option
  */
 public class LaplaceCriterion extends MatrixSolver {
@@ -21,10 +22,10 @@ public class LaplaceCriterion extends MatrixSolver {
         int[] sumOfRows = new int[getRows()];
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getCols(); j++) {
-                sumOfRows[i] = Arrays.stream(matrix[i]).sum();
+                sumOfRows[i] = Arrays.stream(matrix[i]).sum()/getCols();
             }
         }
-        System.out.print("Summing values for each row: ");
+        System.out.print("Summing divided values for each row: ");
         matrixActions.print(sumOfRows);
 
         // Get the highest value of row sums
