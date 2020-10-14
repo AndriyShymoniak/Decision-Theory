@@ -12,7 +12,11 @@ public class TaskL3 {
         MatrixActions matrixActions = new MatrixActions();
         String[][] matrix = fileWorker.readTwoDimensionalArrayStr(new File(Constants.LAB3_FILE_DIRECTORY), 5, 4);
         matrixActions.print(matrix);
+        System.out.println("Kondorce method");
         KondorceVotingMethod kondorceVotingMethod = new KondorceVotingMethod(matrix);
         kondorceVotingMethod.findBestCandidate();
+        System.out.println("Borda method");
+        BordaVotingMethod bordaVotingMethod = new BordaVotingMethod(matrix);
+        bordaVotingMethod.findBestCandidate();
     }
 }
