@@ -3,6 +3,7 @@ package com.shymoniak;
 import com.shymoniak.lab1.TaskAL1;
 import com.shymoniak.lab1.TaskBL1;
 import com.shymoniak.lab2.TaskL2;
+import com.shymoniak.lab3.TaskL3;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class Menu {
             if (var == 1) new TaskAL1().run();
             else if (var == 2) new TaskBL1().run();
             else if (var == 3) new TaskL2().run();
+            else if (var == 4) new TaskL3().run();
 
             printMenu();
             var = scan.nextInt();
@@ -26,6 +28,7 @@ public class Menu {
         System.out.println("1. Lab 1 Task A");
         System.out.println("2. Lab 1 Task B");
         System.out.println("3. Lab 2");
+        System.out.println("4. Lab 3");
         System.out.println("9. Exit");
     }
 }

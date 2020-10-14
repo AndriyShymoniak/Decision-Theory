@@ -28,7 +28,7 @@ public class TaskAL1 {
     public void run() {
         FileWorker fileWorker = new FileWorker();
         MatrixActions matrixActions = new MatrixActions();
-        int[][] matrix = fileWorker.readTwoDimensionalArray(new File(Constants.LAB1_FILE_DIRECTORY), 3, 3);
+        int[][] matrix = fileWorker.readTwoDimensionalArrayInt(new File(Constants.LAB1_FILE_DIRECTORY), 3, 3);
         System.out.println("    Task A\n");
         matrixActions.print(matrix);
 
