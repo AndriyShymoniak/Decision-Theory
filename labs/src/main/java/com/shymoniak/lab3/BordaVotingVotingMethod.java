@@ -1,10 +1,10 @@
 package com.shymoniak.lab3;
 
-public class BordaVotingMethod extends MethodParent {
+public class BordaVotingVotingMethod extends VotingMethodParent {
     private int[] votingNumbers;
     private String[][] candidatesMatrix;
 
-    public BordaVotingMethod(String[][] matrix) {
+    public BordaVotingVotingMethod(String[][] matrix) {
         votingNumbers = createVotingNumbers(matrix);
         candidatesMatrix = createCandidatesMatrix(matrix);
     }
@@ -28,8 +28,6 @@ public class BordaVotingMethod extends MethodParent {
         System.out.println("Candidate A gets - " + candidateASum + " points");
         System.out.println("Candidate B gets - " + candidateBSum + " points");
         System.out.println("Candidate C gets - " + candidateCSum + " points");
-
         printResults(candidateASum,candidateBSum,candidateCSum);
     }
-
 }

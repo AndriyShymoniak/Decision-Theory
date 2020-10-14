@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class KondorceVotingMethod extends MethodParent {
+public class KondorceVotingVotingMethod extends VotingMethodParent {
     private int[] votingNumbers;
     private String[][] candidatesMatrix;
 
@@ -65,7 +65,7 @@ public class KondorceVotingMethod extends MethodParent {
         return resultList.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public KondorceVotingMethod(String[][] matrix) {
+    public KondorceVotingVotingMethod(String[][] matrix) {
         votingNumbers = createVotingNumbers(matrix);
         candidatesMatrix = createCandidatesMatrix(matrix);
     }

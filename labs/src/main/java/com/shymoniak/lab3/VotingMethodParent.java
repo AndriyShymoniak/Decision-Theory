@@ -1,6 +1,6 @@
 package com.shymoniak.lab3;
 
-public class MethodParent {
+public class VotingMethodParent {
 
     protected void printResults(long candidateASum, long candidateBSum, long candidateCSum){
         long max = Math.max(Math.max(candidateASum, candidateBSum), candidateCSum);
