@@ -41,9 +41,9 @@ import java.util.List;
 public class TaskL2 {
 
     public void run() {
-        GSON gson = new GSON();
+        GSON<DecisionTreeEntity> gson = new GSON();
         MatrixActions matrixActions = new MatrixActions();
-        List<DecisionTreeEntity> decisionsList = gson.readFromFile(new File(Constants.LAB2_FILE_DIRECTORY));
+        List<DecisionTreeEntity> decisionsList = gson.readFromFile(new File(Constants.LAB2_FILE_DIRECTORY), DecisionTreeEntity[].class);
         ArrayList<Double> resultValues = new ArrayList<>();
         System.out.println("Decision Tree\n");
 

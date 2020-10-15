@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class GSON {
+public class GSON<T> {
     private static final Gson GSON = new Gson();
     private static final GsonBuilder GSON_BUILDER = new GsonBuilder();
 
-    public List<DecisionTreeEntity> readFromFile(File file) {
-        List<DecisionTreeEntity> entityList = null;
+    public List<T> readFromFile(File file, Class<T[]> klass) {
+        List<T> entityList = null;
         try (FileReader fileReader = new FileReader(file.getPath())) {
-            entityList = Arrays.asList(GSON.fromJson(fileReader, DecisionTreeEntity[].class));
+            entityList = Arrays.asList(GSON.fromJson(fileReader, klass));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

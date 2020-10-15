@@ -1,0 +1,44 @@
+[
+  {
+    "objectName": "Audi A4",
+    "price": 13200,
+    "year": 2014,
+	"mileage": 180000,
+	"fuelConsumption": 10
+  },
+  {
+    "objectName": "BMW 3",
+    "price": 14700,
+    "year": 2013,
+	"mileage": 200000,
+	"fuelConsumption": 8
+  },
+  {
+    "objectName": "Volvo S60",
+    "price": 14500,
+    "year": 2013,
+	"mileage": 123000,
+	"fuelConsumption": 9
+  },
+  {
+    "objectName": "Honda Civic",
+    "price": 14700,
+    "year": 2017,
+	"mileage": 70000,
+	"fuelConsumption": 7
+  },
+  {
+    "objectName": "Ford Focus",
+    "price": 12200,
+    "year": 2018,
+	"mileage": 49000,
+	"fuelConsumption": 9
+  },
+  {
+    "objectName": "WV Passat B7",
+    "price": 13500,
+    "year": 2015,
+	"mileage": 218000,
+	"fuelConsumption": 10
+  }
+]
