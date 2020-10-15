@@ -125,25 +125,25 @@ public class TaskL4 {
 
         Map<String, Double> preferencesEx3 = new HashMap<>();
         preferencesEx3.put("Audi A4", 8.0);
-        preferencesEx3.put("BMW 3", 9.0);
-        preferencesEx3.put("Volvo S60", 6.0);
+        preferencesEx3.put("BMW 3", 7.0);
+        preferencesEx3.put("Volvo S60", 8.0);
         preferencesEx3.put("Honda Civic", 7.0);
-        preferencesEx3.put("Ford Focus", 4.0);
-        preferencesEx3.put("WV Passat B7", 5.0);
+        preferencesEx3.put("Ford Focus", 6.0);
+        preferencesEx3.put("WV Passat B7", 7.0);
         Map<String, Double> coefficientsEx3 = new HashMap<>();
         coefficientsEx3.put("price", 0.25);
-        coefficientsEx3.put("year", 0.2);
-        coefficientsEx3.put("mileage", 0.15);
+        coefficientsEx3.put("year", 0.15);
+        coefficientsEx3.put("mileage", 0.25);
         coefficientsEx3.put("fuelConsumption", 0.3);
-        coefficientsEx3.put("personalPreferences", 0.1);
+        coefficientsEx3.put("personalPreferences", 0.05);
 
 
         ArrayList<Double> sumDecisionsEx1 = calculateCarSumDecisions(preferencesEx1, coefficientsEx1, cars);
         ArrayList<Double> sumDecisionsEx2 = calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
         ArrayList<Double> sumDecisionsEx3 = calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
-        Expert expert1 = new Expert("Expert 1", preferencesEx1, coefficientsEx1, sumDecisionsEx1);
-        Expert expert2 = new Expert("Expert 2", preferencesEx2, coefficientsEx2, sumDecisionsEx2);
-        Expert expert3 = new Expert("Expert 3", preferencesEx3, coefficientsEx3, sumDecisionsEx3);
+        Expert expert1 = new Expert("Expert 1 (баланс)", preferencesEx1, coefficientsEx1, sumDecisionsEx1);
+        Expert expert2 = new Expert("Expert 2 (новизна)", preferencesEx2, coefficientsEx2, sumDecisionsEx2);
+        Expert expert3 = new Expert("Expert 3 (практичність)", preferencesEx3, coefficientsEx3, sumDecisionsEx3);
         result.add(expert1);
         result.add(expert2);
         result.add(expert3);
@@ -175,7 +175,7 @@ public class TaskL4 {
             sum += currentCar.getYear()*coefficients.get(paramsList.get(1));
             sum += currentCar.getMileage()*coefficients.get(paramsList.get(2));
             sum += currentCar.getFuelConsumption()*coefficients.get(paramsList.get(3));
-            sum += currentCar.getFuelConsumption()*preferences.get(carsNamesList.get(counter));
+            sum += preferences.get(carsNamesList.get(counter))*coefficients.get(paramsList.get(4));
             sum = roundNumber(sum, 2);
             resultList.add(sum);
             counter++;
