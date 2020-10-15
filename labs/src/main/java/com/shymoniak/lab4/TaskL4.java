@@ -6,12 +6,10 @@ import com.shymoniak.tools.GSON;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TaskL4 {
+
     public void run() {
         GSON<CarObject> gson = new GSON();
         List<CarObject> cars = gson.readFromFile(new File(Constants.LAB4_FILE_DIRECTORY), CarObject[].class);
@@ -21,13 +19,13 @@ public class TaskL4 {
         double maxPrice = cars.stream().map(el -> el.getPrice()).max(Double::compare).get();
         double maxMileage = cars.stream().map(el -> el.getMileage()).max(Double::compare).get();
 
-
         for (CarObject car : cars) {
             car.updateValues(maxPrice, maxMileage);
         }
 
         List<Expert> experts = fillExperts(cars);
         printTable(experts, cars);
+        getAverageExpertPoints( experts);
 
     }
 
@@ -94,11 +92,10 @@ public class TaskL4 {
 
     private ArrayList<Expert> fillExperts(List<CarObject> cars) {
         ArrayList<Expert> result = new ArrayList<>();
-
         Map<String, Double> preferencesEx1 = new HashMap<>();
         preferencesEx1.put("Audi A4", 6.0);
-        preferencesEx1.put("BMW 3", 7.0);
-        preferencesEx1.put("Volvo S60", 8.0);
+        preferencesEx1.put("BMW 3", 8.0);
+        preferencesEx1.put("Volvo S60", 7.0);
         preferencesEx1.put("Honda Civic", 8.0);
         preferencesEx1.put("Ford Focus", 6.0);
         preferencesEx1.put("WV Passat B7", 7.0);
@@ -136,7 +133,6 @@ public class TaskL4 {
         coefficientsEx3.put("mileage", 0.25);
         coefficientsEx3.put("fuelConsumption", 0.3);
         coefficientsEx3.put("personalPreferences", 0.05);
-
 
         ArrayList<Double> sumDecisionsEx1 = calculateCarSumDecisions(preferencesEx1, coefficientsEx1, cars);
         ArrayList<Double> sumDecisionsEx2 = calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
@@ -189,5 +185,26 @@ public class TaskL4 {
         BigDecimal bd = new BigDecimal(Double.toString(value));
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    private void getAverageExpertPoints(List<Expert> experts){
+        List<String> carsNamesList = new ArrayList<>();
+        carsNamesList.add("Audi A4");
+        carsNamesList.add("BMW 3");
+        carsNamesList.add("Volvo S60");
+        carsNamesList.add("Honda Civic");
+        carsNamesList.add("Ford Focus");
+        carsNamesList.add("WV Passat B7");
+
+        ArrayList<Double> averagePointsList = new ArrayList<>();
+        for (int iVar = 0; iVar <carsNamesList.size() ; iVar++) {
+            int finalIVar = iVar;
+            averagePointsList.add(experts.stream().map(el -> el.getCarSum().get(finalIVar)).mapToDouble(el -> el).average().orElse(-1));
+            System.out.println("Average value for " + carsNamesList.get(finalIVar) + " = " + averagePointsList.get(finalIVar));
+        }
+        Double maxValue = averagePointsList.stream().max(Double::compareTo).get();
+        int indexOfBest = averagePointsList.indexOf(maxValue);
+        System.out.println("\nSo the best options is " + carsNamesList.get(indexOfBest) + " = " + averagePointsList.get(indexOfBest));
+        System.out.println("========================================\n");
     }
 }

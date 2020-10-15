@@ -25,7 +25,7 @@ public class CarObject {
         this.price = (15000 - price) / 1000;
         this.year = (year - 2010);
         this.mileage = (220000 - mileage) / 1000;
-        this.fuelConsumption = (10 - fuelConsumption);
+        this.fuelConsumption = (15 - fuelConsumption);
     }
 
     public void updateValues(double maxPrice, double maxMileage) {
