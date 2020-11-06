@@ -58,21 +58,21 @@ public class MatrixActions {
         return -1;
     }
 
-    public void print(int[] matrix){
-        for (int el: matrix) {
+    public void print(int[] matrix) {
+        for (int el : matrix) {
             System.out.print(el + "  ");
         }
         System.out.println();
     }
 
-    public void print(double[] matrix){
-        for (double el: matrix) {
+    public void print(double[] matrix) {
+        for (double el : matrix) {
             System.out.print(el + "  ");
         }
         System.out.println();
     }
 
-    public void print(int[][] matrix){
+    public void print(int[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + "  ");
@@ -82,7 +82,7 @@ public class MatrixActions {
         System.out.println();
     }
 
-    public void print(String[][] matrix){
+    public void print(String[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + "  ");
@@ -90,5 +90,33 @@ public class MatrixActions {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public int[][] deleteMatrixRow(int[][] arr, int rowNum) {
+        int[][] resultArr = new int[arr.length - 1][arr[0].length];
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                if (i < rowNum) {
+                    resultArr[i][j] = arr[i][j];
+                } else {
+                    resultArr[i][j] = arr[i + 1][j];
+                }
+            }
+        }
+        return resultArr;
+    }
+
+    public int[][] deleteMatrixCol(int[][] arr, int colNum) {
+        int[][] resultArr = new int[arr.length][arr[0].length - 1];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length - 1; j++) {
+                if (j < colNum) {
+                    resultArr[i][j] = arr[i][j];
+                } else {
+                    resultArr[i][j] = arr[i][j + 1];
+                }
+            }
+        }
+        return resultArr;
     }
 }

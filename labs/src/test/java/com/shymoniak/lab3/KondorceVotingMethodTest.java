@@ -1,16 +1,16 @@
 package com.shymoniak.lab3;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static org.junit.Assert.*;
-
 public class KondorceVotingMethodTest {
 
-    class CandidatePairs {
+    static class CandidatePairs {
         private int voters;
         private String candidateWinner;
         private String candidateLooser;
@@ -41,16 +41,26 @@ public class KondorceVotingMethodTest {
     22 A B C
     14 A C B
      */
-    @Test
-    public void findBestCandidate() {
-        ArrayList<CandidatePairs> candidatePairs = new ArrayList<>();
-        ArrayList<CandidatePairs> expected = new ArrayList<>();
+    private static final ArrayList<CandidatePairs> expected = new ArrayList<>();
+
+    @Before
+    public final void setUpCandidatesData() {
         expected.add(new CandidatePairs(22, "A", "B"));
         expected.add(new CandidatePairs(22, "A", "C"));
         expected.add(new CandidatePairs(22, "B", "C"));
         expected.add(new CandidatePairs(14, "A", "C"));
         expected.add(new CandidatePairs(14, "A", "B"));
         expected.add(new CandidatePairs(14, "C", "B"));
+    }
+
+    @After
+    public final void tearDownCandidatesData() {
+        expected.clear();
+    }
+
+    @Test(timeout = 1000)
+    public void findBestCandidate() {
+        ArrayList<CandidatePairs> candidatePairs = new ArrayList<>();
 
         int[] votingNumbers = new int[]{22, 14};
         String[][] candidatesMatrix = new String[][]{{"A","B","C"},
@@ -64,7 +74,7 @@ public class KondorceVotingMethodTest {
                 }
             }
         }
-        System.out.println("KK");
+        System.out.println("Everything is fine");
         Assert.assertEquals(expected, candidatePairs);
     }
 }
