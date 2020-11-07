@@ -8,7 +8,6 @@ import com.shymoniak.tools.FileWorker;
 import com.shymoniak.tools.MatrixActions;
 
 import java.io.File;
-import java.util.Arrays;
 
 public class TaskL5 {
     public void run() {
@@ -21,36 +20,50 @@ public class TaskL5 {
         if (matrixGames.isSolutionSaddlePoint(matrix) != -1) {
             System.out.println("Saddle point" + matrixGames.isSolutionSaddlePoint(matrix));
         } else {
-            System.out.println("Mixed strategy");
+            System.out.println("There is no saddle point");
+            System.out.println("Mixed strategy applying:");
+            // Перевірка на домінуючі рядки, та їх видалення
             matrix = matrixGames.checkDominationRows(matrix);
             matrix = matrixGames.checkDominationCols(matrix);
-            matrix = addAdditionalMatrixRow(matrix);
 
-            LinearSystem<Float, MyEquation> list = generateSystem(matrix);
-            printSystem(list);
-            int i, j;
-            Algorithm<Float, MyEquation> alg = new Algorithm<>(list);
-            try {
-                alg.calculate();
-            } catch (NullPointerException e) {
-                System.out.println(e.getMessage());
-                System.exit(0);
-            } catch (ArithmeticException e) {
-                System.out.println(e.getMessage());
-                System.exit(0);
-            }
-            Float[] x = new Float[matrix.length];
-            for (i = list.size() - 1; i >= 0; i--) {
-                Float sum = 0.0f;
-                for (j = list.size() - 1; j > i; j--) {
-                    sum += list.itemAt(i, j) * x[j];
-                }
-                x[i] = (list.itemAt(i, list.size()) - sum) / list.itemAt(i, j);
-            }
-            printSystem(list);
-            printVector(x);
+            int[][] player1Matrix = matrix;
+            int[][] player2Matrix = transposeMatrix(matrix);
+
+            //додавання необхідних елементів перед використання методу Гауса
+            player1Matrix = addAdditionalMatrixRow(player1Matrix);
+            player2Matrix = addAdditionalMatrixRow(player2Matrix);
+            // Метод Гауса
+            System.out.println("\nPlayer А strategy");
+            launchGaussMethod(player1Matrix);
+            System.out.println("\nPlayer B strategy");
+            launchGaussMethod(player2Matrix);
         }
+    }
 
+    private void launchGaussMethod(int[][] matrix) {
+        LinearSystem<Float, MyEquation> list = generateSystem(matrix);
+        printSystem(list);
+        int i, j;
+        Algorithm<Float, MyEquation> alg = new Algorithm<>(list);
+        try {
+            alg.calculate();
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+        Float[] x = new Float[matrix.length];
+        for (i = list.size() - 1; i >= 0; i--) {
+            Float sum = 0.0f;
+            for (j = list.size() - 1; j > i; j--) {
+                sum += list.itemAt(i, j) * x[j];
+            }
+            x[i] = (list.itemAt(i, list.size()) - sum) / list.itemAt(i, j);
+        }
+        printSystem(list);
+        printVector(x);
     }
 
     private static LinearSystem<Float, MyEquation> generateSystem(int[][] arr) {
@@ -84,9 +97,10 @@ public class TaskL5 {
         System.out.println(s);
     }
 
-    // Додаємо додаткове значення х5 до кожного рядка з коефіцієнтом -1, прирівнюєм кожне рівняння до 0
-    // x1 + x2 +...+ xn - y = 0
-    // Додаємо додатковий рядок  x1 + x2 +...+ xn + 0y = 1
+    /* Додаємо додаткове значення х5 до кожного рядка з коефіцієнтом -1, прирівнюєм кожне рівняння до 0
+        x1 + x2 +...+ xn - y = 0
+        Додаємо додатковий рядок  x1 + x2 +...+ xn + 0y = 1
+    */
     private int[][] addAdditionalMatrixRow(int[][] arr) {
         int[][] newArr = new int[arr.length + 1][arr[0].length + 2];
         for (int i = 0; i < arr.length; i++) {
@@ -104,5 +118,13 @@ public class TaskL5 {
         newArr[newArr.length - 1][newArr.length - 1] = 0;
         newArr[newArr.length - 1][newArr.length] = 1;
         return newArr;
+    }
+
+    public static int[][] transposeMatrix(int [][] m){
+        int[][] temp = new int[m[0].length][m.length];
+        for (int i = 0; i < m.length; i++)
+            for (int j = 0; j < m[0].length; j++)
+                temp[j][i] = m[i][j];
+        return temp;
     }
 }
