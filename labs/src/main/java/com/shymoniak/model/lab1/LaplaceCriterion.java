@@ -1,13 +1,13 @@
-package com.shymoniak.model.lab1.criterias;
+package com.shymoniak.model.lab1;
 
 import com.shymoniak.tools.MatrixActions;
 
 import java.util.Arrays;
 
 /**
- * Sums all values in each row of 2d matrix
- * Divides them by the amount of elements in the row
- * The row which the highest sum value is the best option
+ * Sums all values in each row of 2d matrix.
+ * Divides them by the amount of elements in the row.
+ * The row which the highest sum value is the best option.
  */
 public class LaplaceCriterion extends MatrixSolver {
 
@@ -19,10 +19,10 @@ public class LaplaceCriterion extends MatrixSolver {
         MatrixActions matrixActions = new MatrixActions();
 
         // Sum all values in each row of matrix
-        int[] sumOfRows = new int[getRows()];
-        for (int i = 0; i < getRows(); i++) {
-            for (int j = 0; j < getCols(); j++) {
-                sumOfRows[i] = Arrays.stream(matrix[i]).sum()/getCols();
+        int[] sumOfRows = new int[getRowsNumber()];
+        for (int i = 0; i < getRowsNumber(); i++) {
+            for (int j = 0; j < getColsNumber(); j++) {
+                sumOfRows[i] = Arrays.stream(matrix[i]).sum()/ getColsNumber();
             }
         }
         System.out.print("Summing divided values for each row: ");

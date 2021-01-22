@@ -1,12 +1,13 @@
-package com.shymoniak.model.lab1.criterias;
+package com.shymoniak.model.lab1;
 
 public class MatrixSolver {
     public int[][] matrix;
 
-    public int getRows(){
+    public int getRowsNumber() {
         return matrix[0].length;
     }
-    public int getCols(){
+
+    public int getColsNumber() {
         return matrix.length;
     }
 }

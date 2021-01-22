@@ -1,14 +1,9 @@
 package com.shymoniak.model.lab3;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class KondorceVotingVotingMethod extends VotingMethodParent {
-    private int[] votingNumbers;
-    private String[][] candidatesMatrix;
+public class CondorcetVotingVotingMethod extends VotingMethodParent {
 
     public void findBestCandidate() {
         ArrayList<CandidatePairs> candidatePairs = new ArrayList<>();
@@ -16,7 +11,8 @@ public class KondorceVotingVotingMethod extends VotingMethodParent {
             for (int j = 0; j < candidatesMatrix[0].length; j++) {
                 for (int k = 1; k < candidatesMatrix[0].length; k++) {
                     if ((j + k) < candidatesMatrix[0].length) {
-                        candidatePairs.add(new CandidatePairs(votingNumbers[i], candidatesMatrix[i][j], candidatesMatrix[i][j + k]));
+                        candidatePairs.add(new CandidatePairs(votingNumbers[i], candidatesMatrix[i][j],
+                                                                candidatesMatrix[i][j + k]));
                     }
                 }
             }
@@ -26,9 +22,9 @@ public class KondorceVotingVotingMethod extends VotingMethodParent {
         long countA = candidatePairs.stream().filter(el -> el.getCandidateWinner().equals("A")).count();
         long countB = candidatePairs.stream().filter(el -> el.getCandidateWinner().equals("B")).count();
         long countC = candidatePairs.stream().filter(el -> el.getCandidateWinner().equals("C")).count();
-        System.out.println("A wins " + countA + " times");
-        System.out.println("B wins " + countB + " times");
-        System.out.println("C wins " + countC + " times");
+        System.out.println("A wins " + countA + " times\n"
+                            + "B wins " + countB + " times\n"
+                            + "C wins " + countC + " times");
         printResults(countA, countB, countC);
     }
 
@@ -40,7 +36,9 @@ public class KondorceVotingVotingMethod extends VotingMethodParent {
             if (resultList.contains(oldPair)) {
                 index = resultList.indexOf(oldPair);
                 oldValue = resultList.get(index);
-                resultList.set(index, new CandidatePairs(oldValue.voters + oldPair.voters, oldValue.candidateWinner, oldValue.candidateLooser));
+                resultList.set(index, new CandidatePairs(oldValue.getVoters() + oldPair.getVoters(),
+                                                            oldValue.getCandidateWinner(),
+                                                            oldValue.getCandidateLooser()));
             } else {
                 resultList.add(oldPair);
             }
@@ -65,39 +63,8 @@ public class KondorceVotingVotingMethod extends VotingMethodParent {
         return resultList.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public KondorceVotingVotingMethod(String[][] matrix) {
+    public CondorcetVotingVotingMethod(String[][] matrix) {
         votingNumbers = createVotingNumbers(matrix);
         candidatesMatrix = createCandidatesMatrix(matrix);
-    }
-
-
-    /**
-     * Additional class
-     */
-    @Getter
-    private class CandidatePairs {
-        private int voters;
-        private String candidateWinner;
-        private String candidateLooser;
-
-        public CandidatePairs(int voters, String candidateWinner, String candidateLooser) {
-            this.voters = voters;
-            this.candidateWinner = candidateWinner;
-            this.candidateLooser = candidateLooser;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof CandidatePairs)) return false;
-            CandidatePairs that = (CandidatePairs) o;
-            return Objects.equals(candidateWinner, that.candidateWinner) &&
-                    Objects.equals(candidateLooser, that.candidateLooser);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(candidateWinner, candidateLooser);
-        }
     }
 }

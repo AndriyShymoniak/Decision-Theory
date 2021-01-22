@@ -1,12 +1,9 @@
 package com.shymoniak.controller;
 
-import com.shymoniak.model.lab5.MatrixGames;
-import com.shymoniak.model.lab5.gauss.Algorithm;
-import com.shymoniak.model.lab5.gauss.LinearSystem;
-import com.shymoniak.model.lab5.gauss.MyEquation;
+import com.shymoniak.model.lab5.*;
+import com.shymoniak.model.lab5.gauss.*;
 import com.shymoniak.tools.Constants;
 import com.shymoniak.tools.TxtFileReader;
-import com.shymoniak.tools.MatrixActions;
 
 import java.io.File;
 import java.util.Arrays;
@@ -14,16 +11,18 @@ import java.util.Arrays;
 public class TaskL5 {
     public void run() {
         TxtFileReader txtFileReader = new TxtFileReader();
-        MatrixActions matrixActions = new MatrixActions();
-        int[][] matrix = txtFileReader.readTwoDimensionalArrayInt(new File(Constants.LAB5_FILE_DIRECTORY), 5, 5);
+        int[][] matrix = txtFileReader.read2DArrayInt(
+                            new File(Constants.LAB5_FILE_DIR), 5, 5);
         System.out.println(Arrays.toString(matrix));
 
         MatrixGames matrixGames = new MatrixGames();
         if (matrixGames.isSolutionSaddlePoint(matrix) != -1) {
-            System.out.println("Saddle point" + matrixGames.isSolutionSaddlePoint(matrix));
+            System.out.println("Saddle point"
+                    + matrixGames.isSolutionSaddlePoint(matrix));
         } else {
             System.out.println("There is no saddle point");
             System.out.println("Mixed strategy applying:");
+
             // Перевірка на домінуючі рядки, та їх видалення
             matrix = matrixGames.checkDominationRows(matrix);
             matrix = matrixGames.checkDominationCols(matrix);
@@ -31,9 +30,10 @@ public class TaskL5 {
             int[][] player1Matrix = matrix;
             int[][] player2Matrix = transposeMatrix(matrix);
 
-            //додавання необхідних елементів перед використання методу Гауса
+            // Додавання необхідних елементів перед використання методу Гауса
             player1Matrix = addAdditionalMatrixRow(player1Matrix);
             player2Matrix = addAdditionalMatrixRow(player2Matrix);
+
             // Метод Гауса
             System.out.println("\nPlayer А strategy");
             launchGaussMethod(player1Matrix);
@@ -70,8 +70,7 @@ public class TaskL5 {
 
     private static LinearSystem<Float, MyEquation> generateSystem(int[][] arr) {
         LinearSystem<Float, MyEquation> list = new LinearSystem<Float, MyEquation>();
-        int i;
-        for (i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             MyEquation equation = new MyEquation();
             equation.generate(arr[i]);
             list.push(equation);
@@ -99,7 +98,8 @@ public class TaskL5 {
         System.out.println(s);
     }
 
-    /* Додаємо додаткове значення х5 до кожного рядка з коефіцієнтом -1, прирівнюєм кожне рівняння до 0
+    /* Додаємо додаткове значення х5 до кожного рядка з коефіцієнтом -1,
+        прирівнюємо кожне рівняння до 0
         x1 + x2 +...+ xn - y = 0
         Додаємо додатковий рядок  x1 + x2 +...+ xn + 0y = 1
     */

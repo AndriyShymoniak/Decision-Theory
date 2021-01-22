@@ -1,11 +1,6 @@
 package com.shymoniak.view;
 
-import com.shymoniak.controller.TaskAL1;
-import com.shymoniak.controller.TaskBL1;
-import com.shymoniak.controller.TaskL2;
-import com.shymoniak.controller.TaskL3;
-import com.shymoniak.controller.TaskL4;
-import com.shymoniak.controller.TaskL5;
+import com.shymoniak.controller.*;
 
 import java.util.Scanner;
 
@@ -45,6 +40,7 @@ public class Menu {
     }
 
     private void printMenu() {
+        System.out.println("\n__________________________________\n");
         System.out.println("Choose a laboratory work:");
         System.out.println("1. Lab 1 Task A");
         System.out.println("2. Lab 1 Task B");

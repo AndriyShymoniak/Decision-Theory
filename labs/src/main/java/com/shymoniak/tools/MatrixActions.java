@@ -48,6 +48,36 @@ public class MatrixActions {
         return -1;
     }
 
+    public int[] getMinInRows2D(int[][] arr){
+        int temp;
+        int[] minInRows = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            temp = arr[i][0];
+            for (int j = 0; j < arr[0].length; j++) {
+                if (temp > arr[i][j]) {
+                    temp = arr[i][j];
+                }
+            }
+            minInRows[i] = temp;
+        }
+        return minInRows;
+    }
+
+    public int[] getMaxInCols2D(int[][] arr){
+        int[] maxInCols = new int[arr[0].length];
+        int temp;
+        for (int i = 0; i < arr[0].length; i++) {
+            temp = arr[0][i];
+            for (int j = 0; j < arr.length; j++) {
+                if (temp < arr[j][i]) {
+                    temp = arr[j][i];
+                }
+            }
+            maxInCols[i] = temp;
+        }
+        return maxInCols;
+    }
+
     public int[][] deleteMatrixRow(int[][] arr, int rowNum) {
         int[][] resultArr = new int[arr.length - 1][arr[0].length];
         for (int i = 0; i < arr.length - 1; i++) {

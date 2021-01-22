@@ -7,27 +7,9 @@ import java.util.Arrays;
 public class MatrixGames {
     // Визначити ціну матричної гри (нижню і верхню границю), перевірити наявність сідлової точки
     public int isSolutionSaddlePoint(int[][] arr) {
-        int[] minInRows = new int[arr.length];
-        int[] maxInCols = new int[arr[0].length];
-        int temp;
-        for (int i = 0; i < arr.length; i++) {
-            temp = arr[i][0];
-            for (int j = 0; j < arr[0].length; j++) {
-                if (temp > arr[i][j]) {
-                    temp = arr[i][j];
-                }
-            }
-            minInRows[i] = temp;
-        }
-        for (int i = 0; i < arr[0].length; i++) {
-            temp = arr[0][i];
-            for (int j = 0; j < arr.length; j++) {
-                if (temp < arr[j][i]) {
-                    temp = arr[j][i];
-                }
-            }
-            maxInCols[i] = temp;
-        }
+        MatrixActions matrixActions = new MatrixActions();
+        int[] minInRows = matrixActions.getMinInRows2D(arr);
+        int[] maxInCols = matrixActions.getMaxInCols2D(arr);
         int maxMin = Arrays.stream(minInRows).max().orElse(0);
         int minMax = Arrays.stream(maxInCols).min().orElse(0);
         System.out.println("Minmax = " + minMax + ", Maxmin = " + maxMin);

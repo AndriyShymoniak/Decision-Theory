@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 public class TxtFileReader {
 
-    public String[][] readTwoDimensionalArrayStr(File file, int rows, int cols) {
+    public String[][] read2DArrayStr(File file, int rows, int cols) {
         return convertTextToStrMatrix(getTextFromFile(file), rows, cols);
     }
 
-    public int[][] readTwoDimensionalArrayInt(File file, int rows, int cols) {
+    public int[][] read2DArrayInt(File file, int rows, int cols) {
         StringBuilder stringBuilder = getTextFromFile(file);
         return Arrays.stream(convertTextToStrMatrix(stringBuilder, rows, cols))
                         .map(a ->

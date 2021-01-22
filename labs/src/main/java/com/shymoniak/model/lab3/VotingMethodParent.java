@@ -1,19 +1,21 @@
 package com.shymoniak.model.lab3;
 
 public class VotingMethodParent {
+    protected int[] votingNumbers;
+    protected String[][] candidatesMatrix;
 
-    protected void printResults(long candidateASum, long candidateBSum, long candidateCSum){
+    protected void printResults(long candidateASum, long candidateBSum, long candidateCSum) {
         long max = Math.max(Math.max(candidateASum, candidateBSum), candidateCSum);
         if ((max == candidateASum && max == candidateBSum)
                 || (max == candidateASum && max == candidateCSum)
-                || (max == candidateBSum && max == candidateCSum)){
+                || (max == candidateBSum && max == candidateCSum)) {
             System.out.println("There is no one winner");
 
-        } else if (max == candidateASum){
+        } else if (max == candidateASum) {
             System.out.println("Candidate A wins");
-        } else if (max == candidateBSum){
+        } else if (max == candidateBSum) {
             System.out.println("Candidate B wins");
-        } else if (max == candidateCSum){
+        } else if (max == candidateCSum) {
             System.out.println("Candidate C wins");
         }
         System.out.println();

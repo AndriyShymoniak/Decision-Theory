@@ -14,31 +14,33 @@ public class TaskL4 {
 
     public void run() {
         GSONFileReader<CarObject> gson = new GSONFileReader();
-        List<CarObject> cars = gson.readFromFile(new File(Constants.LAB4_FILE_DIRECTORY), CarObject[].class);
+        List<CarObject> cars = gson.readFromFile(
+                new File(Constants.LAB4_FILE_DIR), CarObject[].class);
         for (CarObject car : cars) {
             car.convertValues();
         }
-        double maxPrice = cars.stream().map(el -> el.getPrice()).max(Double::compare).get();
-        double maxMileage = cars.stream().map(el -> el.getMileage()).max(Double::compare).get();
-
+        double maxPrice = cars.stream().map(el -> el.getPrice())
+                .max(Double::compare)
+                .get();
+        double maxMileage = cars.stream().map(el -> el.getMileage())
+                .max(Double::compare)
+                .get();
         for (CarObject car : cars) {
             car.updateValues(maxPrice, maxMileage);
         }
-
         List<Expert> experts = fillExperts(cars);
         printTable(experts, cars);
-        getAverageExpertPoints( experts);
-
+        getAverageExpertPoints(experts);
     }
 
     private void printTable(List<Expert> experts, List<CarObject> cars) {
-        for (Expert expert: experts) {
+        for (Expert expert : experts) {
             printExpert(expert, cars);
         }
         System.out.println();
     }
 
-    private void printExpert(Expert expert, List<CarObject> cars){
+    private void printExpert(Expert expert, List<CarObject> cars) {
         System.out.println("\nExpert:" + expert.getName());
         List<String> optionsStrings = new ArrayList<>();
         optionsStrings.add("1       Вартість                ");
@@ -60,29 +62,36 @@ public class TaskL4 {
             System.out.print("          " + cars.get(j).getObjectName());
         }
         System.out.println();
-        System.out.print(optionsStrings.get(0) + expert.getCoefficients().get(optionsList2.get(0)));
+        System.out.print(optionsStrings.get(0)
+                + expert.getCoefficients().get(optionsList2.get(0)));
         for (int j = 0; j < cars.size(); j++) {
             System.out.print("             |" + cars.get(j).getPrice());
         }
         System.out.println();
-        System.out.print(optionsStrings.get(1) + expert.getCoefficients().get(optionsList2.get(1)));
+        System.out.print(optionsStrings.get(1)
+                + expert.getCoefficients().get(optionsList2.get(1)));
         for (int j = 0; j < cars.size(); j++) {
             System.out.print("              |" + cars.get(j).getYear());
         }
         System.out.println();
-        System.out.print(optionsStrings.get(2) + expert.getCoefficients().get(optionsList2.get(2)));
+        System.out.print(optionsStrings.get(2)
+                + expert.getCoefficients().get(optionsList2.get(2)));
         for (int j = 0; j < cars.size(); j++) {
             System.out.print("             |" + cars.get(j).getMileage());
         }
         System.out.println();
-        System.out.print(optionsStrings.get(3) + expert.getCoefficients().get(optionsList2.get(3)));
+        System.out.print(optionsStrings.get(3)
+                + expert.getCoefficients().get(optionsList2.get(3)));
         for (int j = 0; j < cars.size(); j++) {
-            System.out.print("              |" + cars.get(j).getFuelConsumption());
+            System.out.print("              |"
+                    + cars.get(j).getFuelConsumption());
         }
         System.out.println();
-        System.out.print(optionsStrings.get(4) + expert.getCoefficients().get(optionsList2.get(4)));
+        System.out.print(optionsStrings.get(4)
+                + expert.getCoefficients().get(optionsList2.get(4)));
         for (int j = 0; j < expert.getPreferences().size(); j++) {
-            System.out.print("              |" + expert.getPreferences().get(cars.get(j).getObjectName()));
+            System.out.print("              |"
+                    + expert.getPreferences().get(cars.get(j).getObjectName()));
         }
         System.out.println();
         System.out.print(optionsStrings.get(5));
@@ -136,19 +145,27 @@ public class TaskL4 {
         coefficientsEx3.put("fuelConsumption", 0.3);
         coefficientsEx3.put("personalPreferences", 0.05);
 
-        ArrayList<Double> sumDecisionsEx1 = calculateCarSumDecisions(preferencesEx1, coefficientsEx1, cars);
-        ArrayList<Double> sumDecisionsEx2 = calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
-        ArrayList<Double> sumDecisionsEx3 = calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
-        Expert expert1 = new Expert("Expert 1 (баланс)", preferencesEx1, coefficientsEx1, sumDecisionsEx1);
-        Expert expert2 = new Expert("Expert 2 (новизна)", preferencesEx2, coefficientsEx2, sumDecisionsEx2);
-        Expert expert3 = new Expert("Expert 3 (практичність)", preferencesEx3, coefficientsEx3, sumDecisionsEx3);
+        ArrayList<Double> sumDecisionsEx1 =
+                calculateCarSumDecisions(preferencesEx1, coefficientsEx1, cars);
+        ArrayList<Double> sumDecisionsEx2 =
+                calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
+        ArrayList<Double> sumDecisionsEx3 =
+                calculateCarSumDecisions(preferencesEx2, coefficientsEx3, cars);
+        Expert expert1 = new Expert("Expert 1 (баланс)", preferencesEx1,
+                coefficientsEx1, sumDecisionsEx1);
+        Expert expert2 = new Expert("Expert 2 (новизна)", preferencesEx2,
+                coefficientsEx2, sumDecisionsEx2);
+        Expert expert3 = new Expert("Expert 3 (практичність)",
+                preferencesEx3, coefficientsEx3, sumDecisionsEx3);
         result.add(expert1);
         result.add(expert2);
         result.add(expert3);
         return result;
     }
 
-    private ArrayList<Double> calculateCarSumDecisions(Map<String, Double> preferences, Map<String, Double> coefficients, List<CarObject> cars){
+    private ArrayList<Double> calculateCarSumDecisions(Map<String,
+            Double> preferences, Map<String, Double> coefficients,
+                                                       List<CarObject> cars) {
         ArrayList<Double> resultList = new ArrayList<>();
         List<String> paramsList = new ArrayList<>();
         paramsList.add("price");
@@ -169,11 +186,11 @@ public class TaskL4 {
         int counter = 0;
         for (int i = 0; i < preferences.size(); i++) {
             currentCar = cars.get(i);
-            sum += currentCar.getPrice()*coefficients.get(paramsList.get(0));
-            sum += currentCar.getYear()*coefficients.get(paramsList.get(1));
-            sum += currentCar.getMileage()*coefficients.get(paramsList.get(2));
-            sum += currentCar.getFuelConsumption()*coefficients.get(paramsList.get(3));
-            sum += preferences.get(carsNamesList.get(counter))*coefficients.get(paramsList.get(4));
+            sum += currentCar.getPrice() * coefficients.get(paramsList.get(0));
+            sum += currentCar.getYear() * coefficients.get(paramsList.get(1));
+            sum += currentCar.getMileage() * coefficients.get(paramsList.get(2));
+            sum += currentCar.getFuelConsumption() * coefficients.get(paramsList.get(3));
+            sum += preferences.get(carsNamesList.get(counter)) * coefficients.get(paramsList.get(4));
             sum = roundNumber(sum, 2);
             resultList.add(sum);
             counter++;
@@ -189,7 +206,7 @@ public class TaskL4 {
         return bd.doubleValue();
     }
 
-    private void getAverageExpertPoints(List<Expert> experts){
+    private void getAverageExpertPoints(List<Expert> experts) {
         List<String> carsNamesList = new ArrayList<>();
         carsNamesList.add("Audi A4");
         carsNamesList.add("BMW 3");
@@ -199,14 +216,23 @@ public class TaskL4 {
         carsNamesList.add("WV Passat B7");
 
         ArrayList<Double> averagePointsList = new ArrayList<>();
-        for (int iVar = 0; iVar <carsNamesList.size() ; iVar++) {
+        for (int iVar = 0; iVar < carsNamesList.size(); iVar++) {
             int finalIVar = iVar;
-            averagePointsList.add(experts.stream().map(el -> el.getCarSum().get(finalIVar)).mapToDouble(el -> el).average().orElse(-1));
-            System.out.println("Average value for " + carsNamesList.get(finalIVar) + " = " + averagePointsList.get(finalIVar));
+            averagePointsList.add(experts.stream()
+                                    .map(el -> el.getCarSum().get(finalIVar))
+                                    .mapToDouble(el -> el)
+                                    .average().orElse(-1));
+            System.out.println("Average value for "
+                    + carsNamesList.get(finalIVar) + " = "
+                    + averagePointsList.get(finalIVar));
         }
-        Double maxValue = averagePointsList.stream().max(Double::compareTo).get();
+        Double maxValue = averagePointsList.stream()
+                                           .max(Double::compareTo)
+                                           .get();
         int indexOfBest = averagePointsList.indexOf(maxValue);
-        System.out.println("\nSo the best options is " + carsNamesList.get(indexOfBest) + " = " + averagePointsList.get(indexOfBest));
+        System.out.println("\nSo the best options is "
+                + carsNamesList.get(indexOfBest) + " = "
+                + averagePointsList.get(indexOfBest));
         System.out.println("========================================\n");
     }
 }

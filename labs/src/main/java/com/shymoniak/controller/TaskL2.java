@@ -3,7 +3,6 @@ package com.shymoniak.controller;
 import com.shymoniak.model.lab2.DecisionTreeEntity;
 import com.shymoniak.tools.Constants;
 import com.shymoniak.tools.GSONFileReader;
-import com.shymoniak.tools.MatrixActions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,25 +42,23 @@ public class TaskL2 {
 
     public void run() {
         GSONFileReader<DecisionTreeEntity> gson = new GSONFileReader();
-        MatrixActions matrixActions = new MatrixActions();
-        List<DecisionTreeEntity> decisionsList = gson.readFromFile(new File(Constants.LAB2_FILE_DIRECTORY), DecisionTreeEntity[].class);
+        List<DecisionTreeEntity> decisionsList = gson.readFromFile(
+                                                        new File(Constants.LAB2_FILE_DIR),
+                                                        DecisionTreeEntity[].class);
         ArrayList<Double> resultValues = new ArrayList<>();
         System.out.println("Decision Tree\n");
 
-        System.out.println("Formula: [(income * incomeProbability + loss * lossProbability) * years / factoryWorth]\n");
+        System.out.println("Formula: [(income * incomeProbability + loss * lossProbability)"
+                            + " * years / factoryWorth]\n");
         for (DecisionTreeEntity decision : decisionsList) {
-            System.out.println(decision.toString());
-            System.out.print("Value calculated with formula: ");
-            resultValues.add(decision.findDecisionValue());
-            System.out.println(decision.findDecisionValue() + "\n");
+            System.out.println(decision.toString() + "\nValue calculated with formula: ");
+            System.out.println(resultValues.add(decision.findDecisionValue()) + "\n");
         }
-
         int indexOfTheBest = resultValues.indexOf(getBiggestInArraylist(resultValues));
         System.out.println("==================================");
         System.out.print("The best solution is: ");
         System.out.println(decisionsList.get(indexOfTheBest));
         System.out.println(resultValues.get(indexOfTheBest));
-        System.out.println("__________________________________\n");
     }
 
     private Double getBiggestInArraylist(ArrayList<Double> doubleArrayList){
