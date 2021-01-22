@@ -1,38 +1,28 @@
 package com.shymoniak.tools;
 
+import java.util.Arrays;
+
 public class MatrixActions {
 
     public int findLowestIn1D(int[] matrix) {
-        int minValue = matrix[0];
-        for (int i = 0; i < matrix.length; i++) {
-            if (minValue > matrix[i]) {
-                minValue = matrix[i];
-            }
-        }
-        return minValue;
+        return Arrays.stream(matrix)
+                    .min()
+                    .getAsInt();
     }
 
     public int findHighestIn1D(int[] matrix) {
-        int maxValue = matrix[0];
-        for (int i = 0; i < matrix.length; i++) {
-            if (maxValue < matrix[i]) {
-                maxValue = matrix[i];
-            }
-        }
-        return maxValue;
+        return Arrays.stream(matrix)
+                    .max()
+                    .getAsInt();
     }
 
     public double findHighestIn1D(double[] matrix) {
-        double maxValue = matrix[0];
-        for (int i = 0; i < matrix.length; i++) {
-            if (maxValue < matrix[i]) {
-                maxValue = matrix[i];
-            }
-        }
-        return maxValue;
+        return Arrays.stream(matrix)
+                    .max()
+                    .getAsDouble();
     }
 
-    public int getIndex1D(int value, int matrix[]) {
+    public int getIndexIn1D(int value, int matrix[]) {
         for (int i = 0; i < matrix.length; i++)
             if (matrix[i] == value) {
                 return i;
@@ -40,7 +30,7 @@ public class MatrixActions {
         return -1;
     }
 
-    public int getIndex1D(double value, double matrix[]) {
+    public int getIndexIn1D(double value, double matrix[]) {
         for (int i = 0; i < matrix.length; i++)
             if (matrix[i] == value) {
                 return i;
@@ -48,7 +38,7 @@ public class MatrixActions {
         return -1;
     }
 
-    public int getIndexOfRow2D(int value, int matrix[][]) {
+    public int getIndexOfRowIn2D(int value, int matrix[][]) {
         for (int i = 0; i < matrix[0].length; i++)
             for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] == value) {
@@ -56,40 +46,6 @@ public class MatrixActions {
                 }
             }
         return -1;
-    }
-
-    public void print(int[] matrix) {
-        for (int el : matrix) {
-            System.out.print(el + "  ");
-        }
-        System.out.println();
-    }
-
-    public void print(double[] matrix) {
-        for (double el : matrix) {
-            System.out.print(el + "  ");
-        }
-        System.out.println();
-    }
-
-    public void print(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + "  ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public void print(String[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + "  ");
-            }
-            System.out.println();
-        }
-        System.out.println();
     }
 
     public int[][] deleteMatrixRow(int[][] arr, int rowNum) {
